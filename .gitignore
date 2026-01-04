@@ -1,0 +1,10 @@
+# Do NOT commit real (private) config with host paths/usernames/container name
+scripts/config.sh
+
+# Do NOT commit scan logs
+scan_logs/
+*.log
+
+# Optional OS/editor noise
+.DS_Store
+Thumbs.db
