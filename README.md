@@ -180,3 +180,14 @@ If files were copied with incorrect ownership/permissions, Nextcloud may not rea
 - Treat these scripts as privileged operations: they call `docker exec`.
 - Never commit your `scripts/config.sh`.
 
+---
+
+## Quick start (NAS)
+
+### A) Copy scripts to the NAS
+1. Copy the `scripts/` folder from this repo to your NAS (any location you prefer).
+2. Make scripts executable on the NAS:
+   ```sh
+   chmod +x /path/to/scripts/*.sh
+
+
