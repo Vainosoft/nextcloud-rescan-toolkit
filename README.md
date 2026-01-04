@@ -182,12 +182,66 @@ If files were copied with incorrect ownership/permissions, Nextcloud may not rea
 
 ---
 
+---
+
 ## Quick start (NAS)
 
 ### A) Copy scripts to the NAS
+
 1. Copy the `scripts/` folder from this repo to your NAS (any location you prefer).
 2. Make scripts executable on the NAS:
+
    ```sh
    chmod +x /path/to/scripts/*.sh
+   ```
+
+### B) Create `config.sh` (local only)
+
+1. On the NAS, copy the sample config:
+
+   ```sh
+   cp /path/to/scripts/config.sample.sh /path/to/scripts/config.sh
+   ```
+2. Edit `config.sh` and set your real values:
+
+   * `NC_CONTAINER` — your Nextcloud container name
+   * `NC_OCC` — path to `occ` inside the container (often `/var/www/html/occ`)
+   * `NC_RUN_UID` — UID for `occ` execution (commonly `33`)
+   * `NC_LOG_DIR` — host directory for logs (recommended: a persistent folder)
+
+> Never commit `scripts/config.sh`.
+
+### C) Test from shell (optional)
+
+* Scan all users:
+
+  ```sh
+  /path/to/scripts/nextcloud_scan.sh mode all
+  ```
+* Scan a specific user:
+
+  ```sh
+  /path/to/scripts/nextcloud_scan.sh mode path user USER_A
+  ```
+* Scan a user subfolder:
+
+  ```sh
+  /path/to/scripts/nextcloud_scan.sh mode path user USER_A folder Photos
+  ```
+
+### D) script_server (recommended UI)
+
+1. Install `script_server` in ADM.
+2. Open admin panel:
+
+   * `http://<NAS-IP>:<SCRIPT_SERVER_PORT>/admin.html`
+3. Add buttons pointing to the scripts in `scripts/`:
+
+   * `nextcloud_scan.sh` (mode dropdown + user dropdown + folder text)
+   * `nextcloud_show_last_log.sh`
+   * `nextcloud_list_scan_logs.sh`
+   * `nextcloud_cleanup_scan_logs_keep_last.sh`
+
+Logs are written to `NC_LOG_DIR`.
 
 
